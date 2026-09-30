@@ -17,8 +17,12 @@ To ensure consistent results, the following Python environment is required. We r
 *   `scipy` (v1.10.1+) — Inferential statistical testing.
 *   `scikit-learn` (v1.2.2+) — Predictive modeling and validation.
 
+**Dependency Management:**
+To ensure environment mirroring, all specific library versions are pinned in the included requirements.txt file.
+
 **Installation:**
-All dependencies are handled within the notebook. To install specific versions, uncomment the `!pip install` line in the setup section of the notebook.
+Dependencies are managed via the requirements.txt file. While the notebook handles this automatically via the `!pip install -r requirements.txt` command, users can also install the environment manually via the terminal using:
+`pip install -r requirements.txt`
 
 ## Execution Guide
 To reproduce the analysis and obtain the results presented in the final synthesis:
