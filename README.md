@@ -58,8 +58,3 @@ Upon successful execution, the notebook produces:
 *   `Reproducibility_Summary.md` — A detailed validation report of the workflow.
 *   `requirements.txt` — A list of pinned library versions for environment mirroring.
 *   `README.md` — This project documentation.
-
-***
-
-### Final Tip for GitHub:
-When you upload this to GitHub, make sure to add the **Colab "Open in Colab" button** to the top of your README. You can do this by adding this line of code to the very top of the file:
