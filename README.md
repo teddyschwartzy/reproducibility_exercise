@@ -1,64 +1,129 @@
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1K6XZ34QXj2pufO1jCqqPRTy21hOlnbAf?usp=sharing)
-
 # Diabetes Risk Factor Analysis: A Study in Reproducibility
 
 ## Project Overview
-This project evaluates clinical risk factors—specifically blood glucose, BMI, and blood pressure—to identify their association with diabetes outcomes. Developed as part of the **HSE 751 - Programming for Health Data Science** curriculum, the primary goal of this repository is to demonstrate a transparent, modular, and fully reproducible computational workflow.
 
-Rather than a linear script, this project utilizes a **configuration-driven pipeline**. This ensures that the analysis can be replicated exactly across different environments and easily extended to include new clinical features without altering the underlying core logic.
+This project examines several common clinical risk factors for diabetes, including glucose, BMI, blood pressure, age, and insulin levels. The goal is to identify differences between diabetic and non-diabetic patients while demonstrating a reproducible data science workflow.
 
-## Software & Dependency Requirements
-To ensure consistent results, the following Python environment is required. We recommend using **Google Colab**, **Jupyter Notebook**, or **VSCode**.
+This project was completed as part of **HSE 751: Programming for Health Data Science**. In addition to performing statistical and machine learning analyses, the notebook emphasizes reproducibility through standardized data cleaning, fixed random seeds, modular functions, and clear documentation.
 
-### Required Libraries:
-*   `pandas` (v2.0.3+) — Data manipulation and schema validation.
-*   `numpy` (v1.24.3+) — Numerical operations and stochastic control.
-*   `matplotlib` (v3.7.1+) & `seaborn` (v0.12.2+) — Publication-quality clinical visualizations.
-*   `scipy` (v1.10.1+) — Inferential statistical testing.
-*   `scikit-learn` (v1.2.2+) — Predictive modeling and validation.
+---
 
-**Dependency Management:**
-To ensure environment mirroring, all specific library versions are pinned in the included requirements.txt file.
+## Software and Dependencies
 
-**Installation:**
-Dependencies are managed via the requirements.txt file. While the notebook handles this automatically via the `!pip install -r requirements.txt` command, users can also install the environment manually via the terminal using:
-`pip install -r requirements.txt`
+The analysis can be run in **Google Colab**, **Jupyter Notebook**, or **VS Code**.
 
-## Execution Guide
-To reproduce the analysis and obtain the results presented in the final synthesis:
+### Required Libraries
 
-1.  **Clone the Repository:** Download all files into a single local directory or clone via Git.
-2.  **Data Setup:** Ensure the dataset `Example Dataset_Diabetes.csv` is located in the root directory.
-3.  **Run the Notebook:** 
-    *   Open `Full_Diabetes_Reproducibility_Notebook.ipynb`.
-    *   Navigate to **Runtime $\rightarrow$ Restart session and run all**.
-    *   The notebook will automatically verify the environment, validate the data schema, and execute the full analytical pipeline.
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- scipy
+- scikit-learn
 
-## Workflow Architecture
-This project implements several high-level data science best practices:
+All package versions are listed in the included `requirements.txt` file to help ensure consistent results across environments.
 
-*   **Configuration-Driven Design:** A central `CONFIG` dictionary controls all variables, feature selections, and statistical thresholds.
-*   **Modular Refactoring:** Logic is decoupled into specialized functions (e.g., `clean_clinical_data()`, `run_inferential_stats()`), preventing code duplication and improving auditability.
-*   **Clinical Data Validation:** The pipeline identifies "biological impossibilities" (e.g., a Glucose level of 0) and implements **Median Imputation** to prevent biasing the results.
-*   **Predictive Modeling:** Beyond descriptive statistics, the project implements a **Logistic Regression** model to predict diabetes outcomes, utilizing a train/test split for rigorous validation.
+### Installation
+
+Install required packages using:
+
+```bash
+pip install -r requirements.txt
+```
+
+If running in Google Colab, the notebook will install any missing dependencies automatically.
+
+---
+
+## Running the Analysis
+
+To reproduce the results:
+
+1. Download or clone the repository.
+2. Confirm that `Example Dataset_Diabetes.csv` is located in the project folder.
+3. Open `Full_Diabetes_Reproducibility_Notebook.ipynb`.
+4. Select **Runtime → Restart session and run all** in Colab (or restart the kernel and run all cells in Jupyter).
+5. The notebook will automatically:
+   - Load and validate the data
+   - Clean missing clinical values
+   - Generate descriptive statistics and visualizations
+   - Perform hypothesis testing
+   - Train and evaluate a logistic regression model
+   - Verify reproducibility outputs
+
+---
+
+## Workflow Summary
+
+Several steps were included to improve reproducibility and consistency.
+
+### Data Cleaning
+
+Some clinical variables contained values of zero that are not biologically realistic, such as glucose and BMI measurements. These values were treated as missing data and replaced using median imputation through a reusable cleaning function.
+
+### Data Validation
+
+The notebook validates column names, data types, and required variables before analysis begins to help prevent errors caused by unexpected changes in the dataset.
+
+### Statistical Analysis
+
+The analysis includes:
+
+- Descriptive statistics
+- Independent-samples t-tests
+- Chi-square tests
+- Correlation analysis
+
+These methods were used to evaluate relationships between patient characteristics and diabetes status.
+
+### Machine Learning
+
+A logistic regression model was developed to predict diabetes outcomes. Model performance was evaluated using:
+
+- Accuracy
+- Precision
+- Recall
+- F1 Score
+
+### Reproducibility Controls
+
+A fixed random seed (`RANDOM_STATE = 42`) was applied throughout the notebook to ensure consistent train-test splits, model training, and bootstrap sampling across runs.
+
+---
 
 ## Expected Outputs
-Upon successful execution, the notebook produces:
-1.  **Clinical Profiles:** A descriptive summary of the patient cohort.
-2.  **Risk Visuals:** Distributions and boxplots showing the separation between diabetic and non-diabetic groups.
-3.  **Correlation Matrix:** A Pearson heatmap identifying linear associations between risk factors.
-4.  **Statistical Proof:** P-values from t-tests and Chi-Square tests indicating significance.
-5.  **ML Metrics:** Model accuracy, precision, recall, and F1-score for diabetes prediction.
-6.  **Reproducibility Evidence:** A fixed random sample and bootstrap mean of BMI.
 
-## Assumptions & Limitations
-*   **Observational Data:** This analysis identifies correlations and associations; it does not establish a causal link between risk factors and diabetes.
-*   **Imputation Strategy:** Median imputation was used for missing biological values. While robust, this assumes the data is Missing At Random (MAR).
-*   **Generalizability:** Results are based on the provided dataset and may not be generalizable to all global populations.
+Running the notebook will generate:
+
+1. Summary statistics describing the patient population
+2. Histograms and boxplots for key clinical variables
+3. A correlation heatmap
+4. Statistical test results and p-values
+5. Logistic regression performance metrics
+6. Bootstrap estimates and reproducibility checks
+
+---
+
+## Assumptions and Limitations
+
+- This dataset is observational, so findings indicate associations rather than causation.
+- Median imputation was used for biologically impossible values and assumes these observations represent missing data.
+- Results are based on the provided dataset and may not generalize to other populations.
+- Logistic regression was selected as a simple and interpretable predictive model; more advanced models may produce different performance results.
+
+---
 
 ## Repository Structure
-*   `Full_Diabetes_Reproducibility_Notebook.ipynb` — The complete analytical pipeline.
-*   `Example Dataset_Diabetes.csv` — The source clinical data.
-*   `Reproducibility_Summary.md` — A detailed validation report of the workflow.
-*   `requirements.txt` — A list of pinned library versions for environment mirroring.
-*   `README.md` — This project documentation.
+- Full_Diabetes_Reproducibility_Notebook.ipynb
+- Example Dataset_Diabetes.csv
+- Reproducibility Summary.txt
+- requirements.txt
+- README.md
+
+### File Descriptions
+
+- `Full_Diabetes_Reproducibility_Notebook.ipynb` - Complete analysis workflow and results
+- `Example Dataset_Diabetes.csv` - Source dataset
+- `Reproducibility Summary.txt` - Summary of reproducibility testing and validation
+- `requirements.txt` - Required Python packages
+- `README.md` - Project documentation
